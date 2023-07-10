@@ -1,8 +1,18 @@
-import './globals.css'
+'use client';
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+import { ChakraProvider } from "@chakra-ui/react"
+import WalletContextProvider from './components/WalletContextProvider'
+
+import { extendTheme } from "@chakra-ui/react"
+
+const colors = {
+  background: "#1F1F1F",
+  accent: "#833BBE",
+  bodyText: "rgba(255, 255, 255, 0.75)",
+}
+
+const theme = extendTheme({ colors })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +26,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <ChakraProvider theme={theme}>
+          <WalletContextProvider>
+            {children}
+          </WalletContextProvider>
+        </ChakraProvider>
+      </body>
     </html>
   )
 }
